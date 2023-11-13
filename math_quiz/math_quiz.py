@@ -1,19 +1,23 @@
 import random
-
 def Random_max_min_selector(minimum, maximum):
     """
     Generates a random integer between the specified minimum and maximum values (inclusive).
-
     Parameters:
     - minimum (int): The minimum value for the random integer.
     - maximum (int): The maximum value for the random integer.
-
     Returns:
     - int: A randomly selected integer between the specified minimum and maximum values.
     """
+    try:
+        # Attempt to convert minimum and maximum to integers
+        minimum = int(minimum)
+        maximum = int(maximum)
+    except NonIntegerError:
+        # Handle the case where the entered values are not an integer
+        print("Entered value is not an integer. Please enter an integer value.")
+        return None
     # Use the randint function from the random module to generate a random integer
     selected_integer = random.randint(minimum, maximum)
-
     # Return the randomly selected integer
     return selected_integer
 
@@ -32,8 +36,6 @@ def Random_return_operator():
     # Return the randomly selected operator
     return selected_operator
 
-
-
 def perform_math_operation(number1, number2, operator):
     """
     Executes a mathematical operation on two numbers based on the specified operator.
@@ -47,18 +49,25 @@ def perform_math_operation(number1, number2, operator):
     - tuple: A tuple containing a formatted string representation of the operation
              ("number1 operator number2") and the computed result.
     """
-    # Construct a string representation of the mathematical operation
-    operation_string = f"{number1} {operator} {number2}"
+    try:
+        # Checking if the entered operator is right and the entries are integer entries
+        # Construct a string representation of the mathematical operation
+        operation_string = f"{number1} {operator} {number2}"
 
-    # Perform the mathematical operation according to the specified operator
-    if operator == '+':
-        result = number1 + number2
-    elif operator == '-':
-        result = number1 - number2
-    else:
-        result = number1 * number2
-
-    # Return a tuple containing the operation string and the computed result
+        # Perform the mathematical operation according to the specified operator
+        if operator == '+':
+            result = number1 + number2
+        elif operator == '-':
+            result = number1 - number2
+        elif operator == '*':
+            result = number1 * number2
+        else:
+            print("Wrong operator entered. Please enter '+', '-' or '*'")
+    except ZeroDivisionError:
+        # When dividing by zero, an error occurs
+        print("Error: Dividing by zero is not possible")
+        return None
+        # Return a tuple containing the operation string and the computed result
     return operation_string, result
 
 
